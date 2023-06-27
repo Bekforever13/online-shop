@@ -1,0 +1,59 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #adadad;
+  padding: 20px 20px 60px;
+  position: relative;
+  .img {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .price {
+    color: #adadad;
+  }
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    bottom: 16px;
+    .to_cart {
+      padding: 8px 16px;
+      background-color: #db9969;
+      border-radius: 12px;
+      color: #fff;
+    }
+    .to_fav {
+      font-size: 20px;
+      left: 180%;
+      position: absolute;
+      @media (max-width: 1080px) {
+        left: 250%;
+      }
+      @media (max-width: 930px) {
+        left: 200%;
+      }
+      @media (max-width: 768px) {
+        left: 180%;
+      }
+      @media (max-width: 700px) {
+        left: 300%;
+      }
+      @media (max-width: 520px) {
+        left: 250%;
+      }
+      @media (max-width: 450px) {
+        left: 200%;
+      }
+      @media (max-width: 360px) {
+        left: 170%;
+      }
+      @media (max-width: 300px) {
+        left: 140%;
+      }
+      
+    }
+  }
+}

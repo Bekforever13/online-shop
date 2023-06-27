@@ -1,16 +1,29 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+import { productsType } from '../../../screens/Home/Home'
 
-const initialState = {
+enum Status {
+	LOADING = 'loading',
+	SUCCESS = 'success',
+	ERROR = 'error'
+}
+
+type initialStateType = {
+	items: productsType[]
+	status: Status
+}
+
+const initialState: initialStateType = {
 	items: [],
-	loading: false,
+	status: Status.LOADING
 }
 
 export const ProductSlice = createSlice({
 	name: 'products',
 	initialState,
 	reducers: {
-		setProducts(state, action) {
+		setProducts(state, action: PayloadAction<productsType[]>) {
 			state.items = action.payload
+			state.status = Status.SUCCESS
 		},
 	},
 })

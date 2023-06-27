@@ -1,44 +1,51 @@
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import ItemBlock from '../../components/ItemBlock/ItemBlock'
-import axiosBasic from '../../service/axios/AxiosBasic'
-import { useDispatch, useSelector } from 'react-redux'
+import Skeleton from '../../components/ItemBlock/Skeleton/Skeleton'
+import { useAppDispatch } from '../../hooks/useAppDispatch'
+import { useAppSelector } from '../../hooks/useAppSelector'
 import { setProducts } from '../../redux/reducers/Products/ProductsSlice'
+import axiosBasic from '../../service/axios/AxiosBasic'
+import styles from './Home.module.scss'
 
-type productsType = {
-  category: string
-  description: string
-  id: number
-  image: string
-  price: number
-  rating: {
-    count: number
-    rate: number
-  }
-  title: string
+export type productsType = {
+	category: string
+	description: string
+	id: number
+	image: string
+	price: number
+	rating: {
+		count: number
+		rate: number
+	}
+	title: string
 }
 
 interface IProducts {
-  ProductReducer: {
-    items: productsType[] | []
-    loading: boolean
-  }
+	ProductReducer: {
+		items: productsType[] | []
+		status: string
+	}
 }
 
-const Home = () => {
-  const dispatch = useDispatch()
-  const products = useSelector((state: IProducts) => (state.ProductReducer.items))
+const Home: React.FC = () => {
+	const dispatch = useAppDispatch()
+	const { items, status } = useAppSelector(
+		(state: IProducts) => state.ProductReducer
+	)
 
 	useEffect(() => {
-		axiosBasic('/products/').then(res => dispatch(setProducts(res.data)))
+		axiosBasic('/products').then(res => dispatch(setProducts(res.data)))
 	}, [])
 
+	const products = items.map((product: productsType) => (
+		<ItemBlock key={product.id} {...product} />
+	))
+
 	return (
-		<div className='px-[10%] flex flex-col py-10 gap-y-5'>
-			<h1 className='text-2xl font-semibold'>Хиты продаж</h1>
-			<div className='grid grid-cols-4'>
-				{products.map(product => {
-          return <ItemBlock />
-        })}
+		<div className={styles.root}>
+			<h1>Хиты продаж</h1>
+			<div className={styles.products}>
+				{status === 'loading' ? <Skeleton /> : products}
 			</div>
 		</div>
 	)

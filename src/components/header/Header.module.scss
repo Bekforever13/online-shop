@@ -1,0 +1,27 @@
+.root {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #eee;
+  padding: 16px 10%;
+  .logo {
+    font-weight: 700;
+    font-size: 24px;
+  }
+  input {
+    width: 300px;
+    border: 1px solid #adadad;
+    padding: 8px 16px;
+    border-radius: 6px;
+
+    @media (max-width: 600px) {
+      display: none;
+    }
+  }
+  .buttons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 20px;
+  }
+}
