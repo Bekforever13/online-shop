@@ -20,40 +20,17 @@
     position: absolute;
     bottom: 16px;
     .to_cart {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
       padding: 8px 16px;
       background-color: #db9969;
       border-radius: 12px;
       color: #fff;
-    }
-    .to_fav {
-      font-size: 20px;
-      left: 180%;
-      position: absolute;
-      @media (max-width: 1080px) {
-        left: 250%;
+      span {
+        font-weight: 800;
       }
-      @media (max-width: 930px) {
-        left: 200%;
-      }
-      @media (max-width: 768px) {
-        left: 180%;
-      }
-      @media (max-width: 700px) {
-        left: 300%;
-      }
-      @media (max-width: 520px) {
-        left: 250%;
-      }
-      @media (max-width: 450px) {
-        left: 200%;
-      }
-      @media (max-width: 360px) {
-        left: 170%;
-      }
-      @media (max-width: 300px) {
-        left: 140%;
-      }
-      
     }
   }
 }

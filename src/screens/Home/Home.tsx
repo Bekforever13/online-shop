@@ -8,6 +8,7 @@ import axiosBasic from '../../service/axios/AxiosBasic'
 import styles from './Home.module.scss'
 
 export type productsType = {
+	title: string
 	category: string
 	description: string
 	id: number
@@ -17,12 +18,12 @@ export type productsType = {
 		count: number
 		rate: number
 	}
-	title: string
+	count?: number
 }
 
 interface IProducts {
 	ProductReducer: {
-		items: productsType[] | []
+		items: productsType[]
 		status: string
 	}
 }
@@ -34,6 +35,7 @@ const Home: React.FC = () => {
 	)
 
 	useEffect(() => {
+		window.scrollTo(0, 0)
 		axiosBasic('/products').then(res => dispatch(setProducts(res.data)))
 	}, [])
 

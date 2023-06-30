@@ -1,9 +1,13 @@
 .root {
+  position: fixed;
   display: flex;
   align-items: center;
   justify-content: space-between;
   background-color: #eee;
   padding: 16px 10%;
+  z-index: 1;
+  width: 100%;
+  box-shadow: 0 0 7px 4px rgba(0, 0, 0, .2);
   .logo {
     font-weight: 700;
     font-size: 24px;
@@ -23,5 +27,27 @@
     align-items: center;
     gap: 20px;
     font-size: 20px;
+    .cart {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      font-size: 1.87rem;
+      line-height: 2.25rem;
+      .num {
+        position: absolute;
+        background-color: rgb(239 68 68);
+        font-size: 20px;
+        border-radius: 50%;
+        height: 30px;
+        width: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        top: -15px;
+        left: 15px;
+      }
+    }
   }
 }

@@ -1,0 +1,53 @@
+.root {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .title {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    img {
+      width: 100px;
+    }
+    div {
+      h1 {
+        border-bottom: 1px solid black;
+        margin-bottom: .5rem;
+        padding-bottom: .5rem;
+        font-weight: 600;
+      }
+      p {
+        width: 500px;
+      }
+    }
+  }
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+
+    .count {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+
+      button {
+        font-weight: 700;
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+        &:disabled {
+          color: rgb(209 213 219);
+        }
+      }
+      span {
+        font-size: 1.875rem;
+        line-height: 2.25rem;
+        padding: 0 0.5rem;
+      }
+    }
+    .remove {
+      font-size: 1.25rem;
+      line-height: 1.75rem;
+    }
+  }
+}

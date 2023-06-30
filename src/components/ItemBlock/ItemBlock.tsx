@@ -1,41 +1,19 @@
-import { HeartOutlined, HeartFilled } from '@ant-design/icons'
+import { message } from 'antd'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { addToFavourite } from '../../redux/reducers/Favourite/FavouriteSlice'
+import { useAppDispatch } from '../../hooks/useAppDispatch'
+import { addItemToCart } from '../../redux/reducers/Cart/Cart'
 import { productsType } from '../../screens/Home/Home'
 import styles from './ItemBlock.module.scss'
-import { useAppDispatch } from '../../hooks/useAppDispatch'
-import { message } from 'antd'
-import { useAppSelector } from '../../hooks/useAppSelector'
 
 const ItemBlock: React.FC<productsType> = (product: productsType) => {
+	const { id, image, price, title, count } = product
 	const dispatch = useAppDispatch()
-	const { id, image, price, title } = product
-	const favouriteItems = useAppSelector(state => state.FavouriteReducer.items)
-	const [isFav, setIsFav] = React.useState(false)
-	
-	const onClickFavourite = () => {
-		message.success('Successfully added to favourite')
-		dispatch(addToFavourite(product))
+
+	const onAddToCart = () => {
+		dispatch(addItemToCart(product))
+		message.success('Product successfully added to cart')
 	}
-
-	React.useEffect(() => {
-		favouriteItems.map((favItem: productsType) => {
-			if (favItem) {
-				favItem.id === id ? setIsFav(true) : setIsFav(false)
-			}
-		})
-	}, [favouriteItems])
-
-	// const isFavourite = () => {
-	// 	favouriteItems.map((favItem: productsType) => {
-	// 		if (favItem) {
-	// 			favItem.id === id ? setIsFav(true) : setIsFav(false)
-	// 		}
-	// 	})
-	// }
-	
-
 
 	return (
 		<div className={styles.root}>
@@ -49,11 +27,15 @@ const ItemBlock: React.FC<productsType> = (product: productsType) => {
 			</Link>
 			<span className={styles.price}>${price}</span>
 			<div className={styles.buttons}>
-				<button className={styles.to_cart}>В Корзину</button>
-				<button onClick={onClickFavourite} className={styles.to_fav}>
-					{isFav ? <HeartFilled /> : <HeartOutlined />}
-					{/* <HeartOutlined /><HeartFilled /> */}
-				</button>
+				{count && count > 0 ? (
+					<button onClick={onAddToCart} className={styles.to_cart}>
+						<span>{count}</span>В Корзину
+					</button>
+				) : (
+					<button onClick={onAddToCart} className={styles.to_cart}>
+						В Корзину
+					</button>
+				)}
 			</div>
 		</div>
 	)

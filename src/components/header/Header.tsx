@@ -1,11 +1,8 @@
-import {
-	HeartOutlined,
-	SearchOutlined,
-	ShoppingCartOutlined,
-} from '@ant-design/icons'
+import { SearchOutlined, ShoppingCartOutlined } from '@ant-design/icons'
 import { Button, Modal } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useAppSelector } from '../../hooks/useAppSelector'
 import styles from './Header.module.scss'
 import Search from './Search'
 
@@ -13,6 +10,9 @@ const Header: React.FC = () => {
 	const [loading, setLoading] = useState(false)
 	const [open, setOpen] = useState(false)
 	const [size, setSize] = useState(0)
+	const countOfCartItems = useAppSelector(
+		state => state.CartReducer.countOfCartItems
+	)
 
 	const showModal = () => {
 		setOpen(true)
@@ -46,32 +46,44 @@ const Header: React.FC = () => {
 
 	return (
 		<>
-		<header className={styles.root}>
-			<Link className={styles.logo} to={'/'}>LOGO</Link>
-			<Search />
-			<div className={styles.buttons}>
-				{size < 600 ? (
-					<button onClick={showModal}>
-						<SearchOutlined />
-					</button>
-				) : (
-					''
-				)}
-				<Link to={'/favourite'}>
-					<HeartOutlined />
+			<header className={styles.root}>
+				<Link className={styles.logo} to={'/'}>
+					LOGO
 				</Link>
-				<Link to={'/cart'}>
-					<ShoppingCartOutlined />
-				</Link>
-			</div>
-		</header>
+				<Search />
+				<div className={styles.buttons}>
+					{size < 600 ? (
+						<button onClick={showModal}>
+							<SearchOutlined />
+						</button>
+					) : (
+						''
+					)}
+					<Link
+						to={'/cart'}
+						className={styles.cart}
+					>
+						{countOfCartItems > 0 ? (
+							<span className={styles.num}>
+								{countOfCartItems}
+							</span>
+						) : (
+							''
+						)}
+						<ShoppingCartOutlined />
+					</Link>
+				</div>
+			</header>
 			<Modal
 				open={open}
 				onOk={handleOk}
 				onCancel={handleCancel}
 				footer={[
 					<div className='my-10'>
-						<input placeholder='Search...' className='w-[80%] mr-5 border py-2 px-4' />
+						<input
+							placeholder='Search...'
+							className='w-[80%] mr-5 border py-2 px-4'
+						/>
 						<Button
 							key='submit'
 							type='primary'
@@ -84,7 +96,8 @@ const Header: React.FC = () => {
 						,
 					</div>,
 				]}
-			></Modal></>
+			></Modal>
+		</>
 	)
 }
 

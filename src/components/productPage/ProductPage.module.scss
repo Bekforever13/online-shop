@@ -1,0 +1,33 @@
+.root {
+	.main {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 2.5rem;
+		padding: 6rem 0;
+		img {
+			width: 300px;
+		}
+		div {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			row-gap: 1.25rem;
+			h1 {
+				font-size: 1.5rem;
+				line-height: 2rem;
+			}
+			.desc {
+				width: 400px;
+			}
+		}
+	}
+	.actions {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 1.25rem;
+		margin-bottom: 2.5rem;
+	}
+}
